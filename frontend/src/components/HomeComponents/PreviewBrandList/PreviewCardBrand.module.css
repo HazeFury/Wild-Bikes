@@ -1,0 +1,14 @@
+.previewcardlistbikes_container {
+    width: 200px;
+    height: 150px;
+    background-color: coral;
+    margin: 10px 10px;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 730px) {
+    .previewlistbikes_container {
+    width: 80vw;
+    height: 45vh;
+    }
+}

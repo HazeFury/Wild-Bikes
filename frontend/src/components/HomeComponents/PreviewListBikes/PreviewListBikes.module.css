@@ -1,0 +1,15 @@
+.previewlistbikes_container {
+    width: 100vw;
+    border: red solid 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+@media screen and (max-width: 730px) {
+    .previewlistbikes_container {
+        flex-direction: column;
+    }
+}

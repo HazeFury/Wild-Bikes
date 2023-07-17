@@ -1,0 +1,100 @@
+.navbar_container {
+  width: 100vw;
+  height: 60px;
+  background-color: rgb(50, 50, 50);
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+.menu_burger {
+    display: none;
+    position: absolute;
+    left: 10px;
+}
+
+.navlink_class {
+  color: aliceblue;
+  text-decoration: none;
+  margin: 0 10px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.navlink_title {
+  text-decoration: none;
+  margin: 0 10px;
+  text-transform: uppercase;
+}
+
+.wb_title_nav {
+  margin: 0 10px;
+}
+
+.wb_title {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 600;
+  color: rgb(255, 100, 100);
+}
+.wb_title span {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 600;
+  color: aliceblue;
+}
+
+.navlink_class:hover {
+  color: rgb(255, 100, 100);
+}
+
+.user_logo {
+  position: absolute;
+  right: 10px;
+}
+
+.sidebar_open {
+width: 60vw;
+max-width: 300px;
+height: 100vh;
+position: fixed;
+left: 0;
+background-color: rgb(50, 50, 50);
+animation: open-menu 0.3s ease;
+}
+
+.sidebar_close {
+width: 60vw;
+height: 100vh;
+max-width: 300px;
+position: fixed;
+left: -300px;
+background-color: rgb(50, 50, 50);  
+animation: close-menu 0.3s ease;  
+}
+
+@keyframes open-menu {
+    from {
+        transform: translateX(-300px);
+      }
+      to {
+        transform: translateX(0px);
+      }
+}
+@keyframes close-menu {
+    from {
+        transform: translateX(300px);
+      }
+      to {
+        transform: translateX(0px);
+      }
+}
+
+@media screen and (max-width: 730px) {
+  .navlink_class {
+    display: none;
+  }
+  .menu_burger {
+    display: flex;
+  }
+}

@@ -1,0 +1,40 @@
+.wallpaper_container {
+    width: 100vw;
+    height: calc(100vh - 60px);
+    background: url("https://cdn.pixabay.com/photo/2016/09/23/21/08/motorcycle-1690452_1280.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -6;
+    position: relative;
+}
+
+.header_div {
+height: 60px;
+width: 100vw;
+background-color: rgba(15, 15, 15, 0.7);
+position: absolute;
+bottom: 0px;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: -5;
+animation: opening 1s ease ;
+}
+
+.header_div h2 {
+    color: aliceblue;
+    margin-left: 10px;
+}
+
+@keyframes opening {
+    0% {
+        transform: translateY(100px);
+    }
+    50% {
+        transform: translateY(100px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
