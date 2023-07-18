@@ -49,3 +49,10 @@ transition: all 0.2s ease;
     margin: 0;
     height: 30px;
 }
+
+
+@media screen and (min-width: 730px) {
+    .sidebar_container, .side_item_list, .side_link_class, .btn_class, .btn_class, .side_legal {
+    display: none;
+    }
+}

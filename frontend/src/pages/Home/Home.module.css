@@ -1,11 +1,11 @@
-.home_container h3 {
+.home_h3 {
     text-align: center;
     font-size: 2rem;
     font-weight: 600;
     text-transform: uppercase;
     font-family: 'Bebas Neue', sans-serif;
     color: rgb(20, 20, 20);
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .home_container {
@@ -24,4 +24,30 @@
     text-align: center;
     margin: 10px auto;
     border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn_to_page:hover {
+    scale: 1.04;
+    filter: brightness(1.5);
+}
+
+.about_us_div {
+    margin: 10px 60px;
+    font-size: 1.4rem;
+}
+
+.about_us_div p {
+    color: black;
+    margin: 10px 0;
+    line-height: 120%;
+    letter-spacing: 1px;
+}
+
+@media screen and (max-width: 730px) {
+    .about_us_div {
+        margin: 10px 30px;
+        font-size: 1rem
+    }
 }

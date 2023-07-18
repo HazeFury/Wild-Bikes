@@ -2,8 +2,6 @@
   width: 100vw;
   height: 60px;
   background-color: rgb(50, 50, 50);
-  position: sticky;
-  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,6 +12,7 @@
     display: none;
     position: absolute;
     left: 10px;
+    z-index: 52;
 }
 
 .navlink_class {
@@ -91,10 +90,21 @@ animation: close-menu 0.3s ease;
 }
 
 @media screen and (max-width: 730px) {
+  .navbar_container {
+    position: sticky;
+    top: 0;
+  }
+  
   .navlink_class {
     display: none;
   }
   .menu_burger {
     display: flex;
+  }
+}
+
+@media screen and (min-width: 730px) {
+  .sidebar_open, .sidebar_close {
+  display: none;
   }
 }

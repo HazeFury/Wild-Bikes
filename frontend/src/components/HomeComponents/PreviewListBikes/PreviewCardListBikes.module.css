@@ -1,14 +1,60 @@
 .previewcardlistbikes_container {
-    width: 200px;
-    height: 150px;
-    background-color: coral;
+    width: 250px;
+    height: 240px;
+    background-color: rgb(241, 241, 241);
     margin: 10px 10px;
-    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 25px 0px rgba(0, 0, 0, 0.253);
+    padding: 10px 10px 0 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.bike_model {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.img_preview_box {
+    width: 230px;
+    height: 150px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.img_preview {
+    width: 100%;
+    
+}
+
+.info_box {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    width: 100%;
+    font-weight: 500;
+    padding: 0 10px 5px 10px;
+}
+.info_box p {
+    font-weight: 500;
+    
 }
 
 @media screen and (max-width: 730px) {
-    .previewlistbikes_container {
-    width: 80vw;
-    height: 45vh;
+    .previewcardlistbikes_container {
+    width: 90vw;
+    height: 35vh;
+    max-width: 300px;
+    }
+    .img_preview_box {
+        max-height: 150px;
+        height: fit-content;
+        
+        overflow: hidden;
+    }
+    .img_preview {
+        height: 100%;
     }
 }

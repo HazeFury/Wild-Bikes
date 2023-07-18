@@ -22,8 +22,8 @@ export default function NavBar() {
   };
 
   const handleLogin = () => {
+    navigate("/login");
     setAnchorEl(null);
-    navigate("login");
   };
 
   const handleMenu = () => {
@@ -33,9 +33,7 @@ export default function NavBar() {
     const handleResize = () => {
       setOpenMenu(false);
     };
-
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };

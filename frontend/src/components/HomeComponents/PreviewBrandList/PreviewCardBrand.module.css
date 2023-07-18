@@ -1,14 +1,25 @@
-.previewcardlistbikes_container {
-    width: 200px;
-    height: 150px;
-    background-color: coral;
+.previewcardbrands_container {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(228, 228, 228);
     margin: 10px 10px;
-    flex-wrap: wrap;
+    border-radius: 10px;
+    border: solid rgb(31, 31, 31) 2px;
+    box-shadow: 0 0 25px 0px rgba(0, 0, 0, 0.253);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s ease;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 730px) {
-    .previewlistbikes_container {
-    width: 80vw;
-    height: 45vh;
-    }
+.img_brand {
+    width: 95px;
+    height: 95px;
+}
+
+.previewcardbrands_container:hover {
+    scale: 1.02;
+    filter: brightness(0.8);
 }

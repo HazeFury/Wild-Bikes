@@ -1,0 +1,137 @@
+.global_div {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 60px;
+}
+
+.open_adminNavnar_container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  background-color: rgb(50, 50, 50);
+  z-index: 10;
+  position: relative;
+  animation: open-menu 0.4s ease;
+}
+.closed_adminNavnar_container {
+  position: fixed;
+  left: -600px;
+  width: 300px;
+  height: 100vh;
+  background-color: rgb(50, 50, 50);
+  z-index: 10;
+  position: relative;
+  animation: close-menu 0.4s ease;
+}
+
+.close_btn {
+  position: absolute;
+  right: 0;
+}
+
+.menu_burger_btn {
+  position: fixed;
+  top: 10px;
+  left: 5px;
+  z-index: 8;
+}
+
+.user_logo {
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  z-index: 18;
+}
+
+.menu_link_box1{
+  position: absolute;
+  top: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu_link_box2 {
+  position: absolute;
+  top: 180px;
+  width: 100%;
+  background-color: rgb(255, 100, 100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu_link_box3 {
+  position: absolute;
+  top: 240px;
+  width: 100%;
+  background-color: rgb(255, 100, 100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu_link_box4 {
+  position: absolute;
+  top: 300px;
+  width: 100%;
+  background-color: rgb(255, 100, 100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu_link_text p {
+  font-size: 1.5rem;
+  margin-left: 0px;
+  color: aliceblue;
+}
+
+.wb_box {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  width: 100%;
+  height: 60px;
+  color: aliceblue;
+  text-align: center;
+}
+
+.wb_title {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 600;
+  color: rgb(255, 100, 100);
+}
+.wb_title span {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 600;
+  color: aliceblue;
+}
+
+@keyframes open-menu {
+  from {
+    transform: translateX(-300px);
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
+@keyframes close-menu {
+  from {
+    transform: translateX(240px);
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
+
+@media screen and (min-width: 730px) {
+  .closed_adminNavnar_container {
+    left: -240px;
+  }
+  .menu_burger_btn {
+    display: none;
+  }
+}

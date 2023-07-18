@@ -30,11 +30,14 @@ animation: opening 1s ease ;
 @keyframes opening {
     0% {
         transform: translateY(100px);
+        opacity: 0;
     }
     50% {
         transform: translateY(100px);
+        opacity: 0;
     }
     100% {
         transform: translateY(0px);
+        opacity: 0.75;
     }
 }
