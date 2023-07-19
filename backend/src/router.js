@@ -6,10 +6,10 @@ const itemControllers = require("./controllers/itemControllers");
 const userControllers = require("./controllers/userControllers");
 const bikeControllers = require("./controllers/bikeControllers");
 const {
-  getUserByEmail,
-  verifyPassword,
-  hashPassword,
-  verifyIfUserIsRegistered,
+  // getUserByEmail,
+  // verifyPassword,
+  // hashPassword,
+  // verifyIfUserIsRegistered,
   verifyToken,
   logout,
 } = require("./services/auth");
@@ -22,16 +22,16 @@ router.delete("/items/:id", itemControllers.destroy);
 
 // ------------------  LOGIN & REGISTER routes  -----------------------
 
-router.post("/login", getUserByEmail, verifyPassword);
+// router.post("/login", getUserByEmail, verifyPassword);
 
 router.get("/logout", logout);
 
-router.post(
-  "/register",
-  verifyIfUserIsRegistered,
-  hashPassword,
-  userControllers.add
-);
+// router.post(
+//   "/register",
+//   verifyIfUserIsRegistered,
+//   hashPassword,
+//   userControllers.add
+// );
 
 // ------------------ / LOGIN & REGISTER routes  -----------------------
 

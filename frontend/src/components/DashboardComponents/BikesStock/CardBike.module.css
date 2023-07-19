@@ -1,7 +1,144 @@
 .cardbike_container {
-    width: 90%;
-    height: 80px;
-    background-color: aliceblue;
-    border-radius: 10px;
-    margin: 15px 0;
+  width: 90%;
+  height: 80px;
+  background-color: aliceblue;
+  border-radius: 10px;
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 25px 0 rgba(59, 59, 59, 0.306);
+  overflow: hidden;
+}
+
+.name_spec_container {
+  height: 100%;
+  width: 61%;
+  display: flex;
+}
+
+.id_box,
+.img_box,
+.bike_name_box,
+.bike_spec_box,
+.btn_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.id_box {
+  height: 100%;
+  width: 5%;
+}
+
+.img_box {
+  height: 100%;
+  width: 125px;
+  overflow: hidden;
+}
+
+.img_bike {
+  width: 100%;
+  height: 100%;
+}
+
+.bike_name_box {
+  height: 100%;
+  width: 40%;
+}
+
+.bike_spec_box {
+  height: 100%;
+  width: 60%;
+}
+
+.btn_box {
+  height: 100%;
+  width: 25%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn_row {
+  width: 100%;
+  height: 60%;
+}
+
+.spec_column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 10px;
+}
+
+.bold {
+  font-weight: 400;
+}
+
+.modal_container {
+  height: 500px;
+  width: 400px;
+}
+
+.delete_modal_container {
+  height: 150px;
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status_bar {
+  font-weight: 400;
+  border-radius: 10px;
+  padding: 2px 5px;
+  }
+
+  .success_color {
+    background-color: rgb(100, 176, 100);
+}
+.error_color {
+    background-color: rgb(241, 87, 87);
+}
+.warning_color {
+    background-color: rgb(113, 113, 113);
+}
+.waiting_color {
+    background-color: rgb(91, 172, 204);
+}
+
+@media screen and (max-width: 800px) {
+  .cardbike_container {
+    height: 120px;
+  }
+  .name_spec_container {
+    flex-direction: column;
+  }
+  .bike_name_box {
+    height: 40%;
+    width: 100%;
+    border-bottom: solid black 1px;
+  }
+  .bike_spec_box {
+    height: 60%;
+    width: 100%;
+  }
+  .img_box {
+    display: none;
+  }
+  .btn_box {
+    width: 35%;
+  }
+  .spec_column {
+    margin: 0 5px;
+  }
+  .modal_container {
+    height: 60vh;
+    width: 70vw;
+  }
 }

@@ -5,16 +5,43 @@ import {
   MenuItem,
   FormControl,
   Select,
+  Pagination,
+  Stack,
+  Modal,
+  Box,
 } from "@mui/material";
 import CardBike from "./CardBike";
+import CreateBike from "./InsideModal/CreateBike";
 import styles from "./BikeStock.module.css";
 import "../../../App.css";
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function BikeStock() {
   const [age, setAge] = useState("");
+  // ------ MODAL FOR CREATE BIKE  -----------
+  const [openCreate, setOpenCreate] = useState(false);
+  const handleOpenCreate = () => setOpenCreate(true);
+  const handleCloseCreate = () => setOpenCreate(false);
 
+  // ------ FILTER FUNCTION  -----------
   const handleChange = (event) => {
     setAge(event.target.value);
+  };
+
+  // ------ PAGINATION  -----------
+  const [page, setPage] = useState(1);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
   };
 
   const [stockData] = useState([
@@ -23,6 +50,8 @@ export default function BikeStock() {
       model: "Bandit 650",
       year: 2008,
       kilometers: 34000,
+      price: 3500,
+      inStock: true,
       bridle: false,
       photo:
         "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
@@ -34,6 +63,8 @@ export default function BikeStock() {
       model: "Bandit 650",
       year: 2008,
       kilometers: 34000,
+      price: 3500,
+      inStock: true,
       bridle: false,
       photo:
         "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
@@ -45,6 +76,8 @@ export default function BikeStock() {
       model: "Bandit 650",
       year: 2008,
       kilometers: 34000,
+      price: 3500,
+      inStock: true,
       bridle: false,
       photo:
         "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
@@ -56,6 +89,8 @@ export default function BikeStock() {
       model: "Bandit 650",
       year: 2008,
       kilometers: 34000,
+      price: 3500,
+      inStock: true,
       bridle: false,
       photo:
         "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
@@ -67,6 +102,8 @@ export default function BikeStock() {
       model: "Bandit 650",
       year: 2008,
       kilometers: 34000,
+      price: 3500,
+      inStock: true,
       bridle: false,
       photo:
         "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
@@ -78,6 +115,8 @@ export default function BikeStock() {
       model: "Bandit 650",
       year: 2008,
       kilometers: 34000,
+      price: 3500,
+      inStock: true,
       bridle: false,
       photo:
         "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
@@ -89,6 +128,8 @@ export default function BikeStock() {
       model: "Bandit 650",
       year: 2008,
       kilometers: 34000,
+      price: 3500,
+      inStock: true,
       bridle: false,
       photo:
         "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
@@ -100,6 +141,8 @@ export default function BikeStock() {
       model: "Bandit 650",
       year: 2008,
       kilometers: 34000,
+      price: 3500,
+      inStock: true,
       bridle: false,
       photo:
         "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
@@ -111,6 +154,8 @@ export default function BikeStock() {
       model: "Bandit 650",
       year: 2008,
       kilometers: 34000,
+      price: 3500,
+      inStock: true,
       bridle: false,
       photo:
         "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
@@ -122,6 +167,8 @@ export default function BikeStock() {
       model: "Bandit 650",
       year: 2008,
       kilometers: 34000,
+      price: 3500,
+      inStock: true,
       bridle: false,
       photo:
         "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
@@ -200,13 +247,41 @@ export default function BikeStock() {
             </Select>
           </FormControl>
         </div>
-        <Button variant="contained" color="success">
+        <Button
+          onClick={handleOpenCreate}
+          variant="contained"
+          color="success"
+          sx={{ mx: 2 }}
+        >
           Ajouter une moto
         </Button>
+        <Modal
+          open={openCreate}
+          onClose={handleCloseCreate}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <div className={styles.modal_container}>
+              <CreateBike />
+            </div>
+          </Box>
+        </Modal>
       </div>
+
       {stockData.map((bike) => (
         <CardBike key={bike.id} data={bike} />
       ))}
+      <div className={styles.pagination_container}>
+        <Stack spacing={1} sx={{ my: 4 }}>
+          <Pagination
+            page={page}
+            onChange={handleChangePage}
+            count={8}
+            color="primary"
+          />
+        </Stack>
+      </div>
     </div>
   );
 }

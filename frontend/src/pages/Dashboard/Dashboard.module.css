@@ -1,5 +1,6 @@
 .dashboard_container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    background-color: rgb(211, 211, 211);
 }
