@@ -62,7 +62,7 @@ export default function NavBar() {
             )}
           </Button>
         </div>
-        <NavLink to="/" className={styles.navlink_class}>
+        <NavLink to="/motos" className={styles.navlink_class}>
           Nos motos
         </NavLink>
         <NavLink to="/" className={styles.navlink_class}>

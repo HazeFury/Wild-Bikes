@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
-import styles from "./PreviewCardListBikes.module.css";
-import "../../../App.css";
+import styles from "./BikeCard.module.css";
 
-export default function PreviewCardListBikes({ bike }) {
+export default function BikeCard({ bike }) {
   return (
     <div className={styles.previewcardlistbikes_container}>
       <div className={styles.img_preview_box}>
@@ -23,7 +22,7 @@ export default function PreviewCardListBikes({ bike }) {
   );
 }
 
-PreviewCardListBikes.propTypes = {
+BikeCard.propTypes = {
   bike: PropTypes.shape({
     image_url: PropTypes.string.isRequired,
     model: PropTypes.string.isRequired,

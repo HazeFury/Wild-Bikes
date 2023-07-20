@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   Button,
   InputLabel,
@@ -9,11 +10,15 @@ import {
   Stack,
   Modal,
   Box,
+  CircularProgress,
+  Backdrop,
 } from "@mui/material";
 import CardBike from "./CardBike";
 import CreateBike from "./InsideModal/CreateBike";
 import styles from "./BikeStock.module.css";
+import { useUserContext } from "../../../contexts/userContext";
 import "../../../App.css";
+import instance from "../../../services/APIService";
 
 const style = {
   position: "absolute",
@@ -27,159 +32,72 @@ const style = {
 };
 
 export default function BikeStock() {
+  const { logout } = useUserContext();
+  const [backdropState, setBackdropState] = useState(false);
+  const [stockData, setStockData] = useState([]);
+  const [refreshData, setRefreshData] = useState(false);
   const [age, setAge] = useState("");
   // ------ MODAL FOR CREATE BIKE  -----------
   const [openCreate, setOpenCreate] = useState(false);
   const handleOpenCreate = () => setOpenCreate(true);
   const handleCloseCreate = () => setOpenCreate(false);
+  // ---------------------------------
 
   // ------ FILTER FUNCTION  -----------
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  // ---------------------------------
 
   // ------ PAGINATION  -----------
-  const [page, setPage] = useState(1);
+  const [numberOfResults, setNumberOfResults] = useState(0);
+  const limitPerPage = 10;
+  const defaultPage = 1;
+  const [maxPage, setMaxPage] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page"), 10) || defaultPage
+  );
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    setCurrentPage(newPage);
   };
+  // ---------------------------------
 
-  const [stockData] = useState([
-    {
-      id: 1,
-      model: "Bandit 650",
-      year: 2008,
-      kilometers: 34000,
-      price: 3500,
-      inStock: true,
-      bridle: false,
-      photo:
-        "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
-      brand_id: "Suzuki",
-      segment_id: "Roadster",
-    },
-    {
-      id: 2,
-      model: "Bandit 650",
-      year: 2008,
-      kilometers: 34000,
-      price: 3500,
-      inStock: true,
-      bridle: false,
-      photo:
-        "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
-      brand_id: "Suzuki",
-      segment_id: "Roadster",
-    },
-    {
-      id: 3,
-      model: "Bandit 650",
-      year: 2008,
-      kilometers: 34000,
-      price: 3500,
-      inStock: true,
-      bridle: false,
-      photo:
-        "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
-      brand_id: "Suzuki",
-      segment_id: "Roadster",
-    },
-    {
-      id: 4,
-      model: "Bandit 650",
-      year: 2008,
-      kilometers: 34000,
-      price: 3500,
-      inStock: true,
-      bridle: false,
-      photo:
-        "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
-      brand_id: "Suzuki",
-      segment_id: "Roadster",
-    },
-    {
-      id: 5,
-      model: "Bandit 650",
-      year: 2008,
-      kilometers: 34000,
-      price: 3500,
-      inStock: true,
-      bridle: false,
-      photo:
-        "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
-      brand_id: "Suzuki",
-      segment_id: "Roadster",
-    },
-    {
-      id: 6,
-      model: "Bandit 650",
-      year: 2008,
-      kilometers: 34000,
-      price: 3500,
-      inStock: true,
-      bridle: false,
-      photo:
-        "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
-      brand_id: "Suzuki",
-      segment_id: "Roadster",
-    },
-    {
-      id: 7,
-      model: "Bandit 650",
-      year: 2008,
-      kilometers: 34000,
-      price: 3500,
-      inStock: true,
-      bridle: false,
-      photo:
-        "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
-      brand_id: "Suzuki",
-      segment_id: "Roadster",
-    },
-    {
-      id: 8,
-      model: "Bandit 650",
-      year: 2008,
-      kilometers: 34000,
-      price: 3500,
-      inStock: true,
-      bridle: false,
-      photo:
-        "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
-      brand_id: "Suzuki",
-      segment_id: "Roadster",
-    },
-    {
-      id: 9,
-      model: "Bandit 650",
-      year: 2008,
-      kilometers: 34000,
-      price: 3500,
-      inStock: true,
-      bridle: false,
-      photo:
-        "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
-      brand_id: "Suzuki",
-      segment_id: "Roadster",
-    },
-    {
-      id: 10,
-      model: "Bandit 650",
-      year: 2008,
-      kilometers: 34000,
-      price: 3500,
-      inStock: true,
-      bridle: false,
-      photo:
-        "https://img.classistatic.de/api/v1/mo-prod/images/78/787be64c-f20f-45ff-962e-088662dc6ba0?rule=mo-1024.jpg",
-      brand_id: "Suzuki",
-      segment_id: "Roadster",
-    },
-  ]);
+  useEffect(() => {
+    setBackdropState(true);
+    setSearchParams((params) => {
+      searchParams.set("page", currentPage);
+      if (currentPage === 1) {
+        return undefined;
+      }
+      return params;
+    });
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    };
+    instance
+      .get(`/bikes?page=${currentPage}`)
+      .then((res) => {
+        setStockData(res.data.datas);
+        setNumberOfResults(res.data.total);
+        setMaxPage(Math.ceil(res.data.total / limitPerPage));
+        setBackdropState(false);
+        scrollToTop();
+      })
+      .catch((err) => {
+        if (err.response?.status === 403) {
+          logout(true);
+        }
+        console.error(err);
+      });
+  }, [currentPage, refreshData]);
 
   return (
     <div className={styles.bikes_stock_container}>
-      <h1>Mes motos</h1>
+      <h1>Mes {numberOfResults} motos</h1>
       <div className={styles.filter_container}>
         <div className={styles.filter_box}>
           <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
@@ -263,24 +181,39 @@ export default function BikeStock() {
         >
           <Box sx={style}>
             <div className={styles.modal_container}>
-              <CreateBike />
+              <CreateBike
+                close={handleCloseCreate}
+                refreshData={refreshData}
+                setRefreshData={setRefreshData}
+              />
             </div>
           </Box>
         </Modal>
       </div>
 
       {stockData.map((bike) => (
-        <CardBike key={bike.id} data={bike} />
+        <CardBike
+          key={bike.id}
+          data={bike}
+          refreshData={refreshData}
+          setRefreshData={setRefreshData}
+        />
       ))}
       <div className={styles.pagination_container}>
         <Stack spacing={1} sx={{ my: 4 }}>
           <Pagination
-            page={page}
+            page={currentPage}
             onChange={handleChangePage}
-            count={8}
+            count={maxPage}
             color="primary"
           />
         </Stack>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={backdropState}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </div>
     </div>
   );

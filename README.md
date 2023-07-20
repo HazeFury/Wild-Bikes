@@ -1,53 +1,99 @@
-## Concept
 
-This template is meant to serve as a foundation for every P2/P3 following the React-Express-MySQL stack, as learned in Wild Code School.
-It's pre-configured with a set of tools which'll help students produce industry-quality and easier-to-maintain code, while staying as simple as possible to use.
+# Wild Bikes
 
-## Setup & Use
+Wild Bikes est une application pour un concessionnaire de moto qui souhaite exposer ses motos afin d'attirer de nouveaux clients via son site. L'application dispose d'une partie back-office pour gérer son stock de moto.
 
-### Windows users
+## Installation
 
-Be sure to run these commands in a git terminal to avoid [issues with newline formats](https://en.wikipedia.org/wiki/Newline#Issues_with_different_newline_formats):
+Pour commencer, créer un nouveau dossier et rendez-vous dedans avec votre terminal favori, puis tapez les commandes suivante :
+
+
 
 ```
-git config --global core.eol lf
-git config --global core.autocrlf false
+ git clone https://github.com/HazeFury/Wild-Bikes.git
 ```
 
-### Project Initialization
+```
+ cd Wild-Bikes
+```
+```
+ npm i
+```
 
-- In VSCode, install plugins **Prettier - Code formatter** and **ESLint** and configure them
-- Clone this repo, enter it
-- If you are using `yarn` or `pnpm`, adapt the `config/cli` in `package.json`
-- Run command `npm install`
-- _NB: To launch the backend server, you'll need an environment file with database credentials. You'll find a template one in `backend/.env.sample`_
+Par sécurité, vous pouvez également executer la commande npm i dans le dossier "frontend" et "backend". Pour s'y rendre :
+```
+cd backend
+``` 
+```
+npm i
+``` 
+```
+cd ..\frontend
+``` 
+```
+npm i
+``` 
+et refaite la commande :
+```
+cd ..
+``` 
+afin de revenir au dossier racine.
 
-### Available Commands
 
-- `migrate` : Run the database migration script
-- `dev` : Starts both servers (frontend + backend) in one terminal
-- `dev-front` : Starts the React frontend server
-- `dev-back` : Starts the Express backend server
-- `lint` : Runs validation tools, and refuses unclean code (will be executed on every _commit_)
-- `fix` : Fixes linter errors (run it if `lint` growls on your code !)
+Ouvrez ensuite une éditeur SQL (dans l'exemple suivant, nous utilisons mySQL) et depuis votre compte root, tapez les lignes suivante :
 
-## FAQ
+```
+CREATE USER 'exemple_wild_bikes'@'localhost' IDENTIFIED BY 'wild_bikes_exemple123';
+CREATE DATABASE wild_bikes_db;
+GRANT ALL privileges ON wild_bikes_db.* TO 'exemple_wild_bikes'@'localhost';
+```
 
-### Tools
+Dans le dossier que vous avez récemment cloné depuis GitHub, rendez-vous dans le dossier "backend" et faite une copie du fichier ".env sample" et renomez le en ".env" et remplacez les valeur par défaut de la base données par celles que vous venez de créés.
 
-- _Concurrently_ : Allows for several commands to run concurrently in the same CLI
-- _Husky_ : Allows to execute specific commands that trigger on _git_ events
-- _Vite_ : Alternative to _Create-React-App_, packaging less tools for a more fluid experience
-- _ESLint_ : "Quality of code" tool, ensures chosen rules will be enforced
-- _Prettier_ : "Quality of code" tool as well, focuses on the styleguide
-- _ Airbnb Standard_ : One of the most known "standards", even though it's not officially linked to ES/JS
-- _Nodemon_ : Allows to restart the server everytime a .js file is udated
+En reprenant l'exemple au dessus, voilà ce que vous devriez obtenir :
 
-### Deployment
+```
+APP_PORT=5000
+FRONTEND_URL=http://localhost:5173
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=exemple_wild_bikes
+DB_PASSWORD=wild_bikes_exemple123
+DB_NAME=wild_bikes_db
+```
 
-For deployment, you have to go to `secrets` → app `actions` on the github repo to insert via `New repository secret` :
+Après avoir fait cela, rendez-vous dans le dossier "frontend" à la racine du projet et faite de nouveau une copie du fichier ".env sample" que renomerez en ".env". 
 
-- CAPROVER_BACK_APPNAME : name app on caprover
-- CAPROVER_FRONT_APPNAME : name app on caprover
-- CAPROVER_PASSWORD : password caprover
-- CAPROVER_SERVER : link of domain
+Pour terminer il ne vous reste plus qu'a taper cette commande dans votre terminal pour remplir la base données : 
+
+```
+npm run migrate
+```
+
+Si tout c'est bien passé, vous pouvez tapez cette commande pour lancer le serveur et découvrir l'application Wild Bikes : 
+
+```
+npm run dev
+``` 
+
+## Utilisation
+
+Vous arriverez sur la page d'accueil sur laquelle vous pourrez visualiser les différentes parties du site. À ce jour le site n'est pas fini, il y à donc des liens qui vont ramenerons sur la page d'accueil.
+
+La partie Administrateur est disponbile en cliquant sur le logo uilisateur en haut à droite de votre écran.
+Vous devrez vous connecter pour accéder à cette partie. Sans les identifiants, il vous sera impossible de voir ses pages dont l'accès est sécurisé.
+
+Il y un compte admin prévu pour essayer l'application, voici les identifiants :
+
+```
+mail : admin@wildbikes.com
+mot de passse : 12345
+``` 
+
+Une fois connecté, vous aurez le loisir de découvrir la partie stock des motos dans laquelle vous pourrez voir, créer, modifier et suprimer les motos dans votre stock.
+
+Enjoy =)
+## 🚀 À propos
+
+Ce projet à été réalisé dans le cadre d'une évaluation de compétence dirigé par la WILD CODE SCHOOL de Lyon.
+

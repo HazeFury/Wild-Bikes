@@ -9,7 +9,7 @@ export default function SideBar({ closeModal }) {
   return (
     <div className={styles.sidebar_container}>
       <div className={`${styles.side_item_list} ${styles.side_btn_class}`}>
-        <Link to="/" className={styles.side_link_class}>
+        <Link to="/motos" className={styles.side_link_class}>
           <button
             onClick={handleClose}
             type="button"

@@ -95,8 +95,9 @@
 
 .status_bar {
   font-weight: 400;
-  border-radius: 10px;
-  padding: 2px 5px;
+  border-radius: 0 0 6px 6px;
+  padding: 2px 10px;
+  height: 60%;
   }
 
   .success_color {
@@ -128,7 +129,7 @@
     height: 60%;
     width: 100%;
   }
-  .img_box {
+  .img_box, .id_box {
     display: none;
   }
   .btn_box {
@@ -141,4 +142,8 @@
     height: 60vh;
     width: 70vw;
   }
+  .status_bar {
+    border-radius:6px;
+    height: 20%;
+    }
 }

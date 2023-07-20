@@ -65,7 +65,7 @@ const verifyPassword = (req, res, next) => {
           secure: process.env.NODE_ENV === "production",
         });
         next();
-        if (req.user.role === "parent") {
+        if (req.user.role === "admin") {
           res.send(req.user);
         }
       } else {

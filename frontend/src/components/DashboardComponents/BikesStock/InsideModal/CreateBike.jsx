@@ -1,50 +1,57 @@
+import PropTypes from "prop-types";
 import { useState, useEffect, useRef } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import { InputLabel, FormControl, Button } from "@mui/material";
+import { toast } from "react-toastify";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import styles from "./CreateBike.module.css";
+import { useUserContext } from "../../../../contexts/userContext";
+import instance from "../../../../services/APIService";
 
 // ('Yamaha'),('Honda'),('Suzuki'),('Kawasaki'),('Ducati'),('BMW'),('Triumph'),('Harley Davidson'),('Indian');
 //  ('roadster'),('sportive'),('trail'),('custom'),('scrambler');
 // (model, year, kilometers, bridle, photo, color, price, brand_id, segment_id)
-export default function CreateBike() {
+export default function CreateBike({ close, refreshData, setRefreshData }) {
+  const notifySuccess = (text) => toast.success(text);
+  const notifyFail = () => toast.error("Un problème est survenu");
+  const { logout } = useUserContext();
   const [newBikeData, setnewBikeData] = useState({
     model: "",
     year: "",
     kilometers: "",
     bridle: "",
-    photo: "",
+    image_url: "",
     color: "",
-    price: "",
     brand_id: "",
     segment_id: "",
+    price: "",
   });
 
   const handleChange = (event) => {
     setnewBikeData({ ...newBikeData, [event.target.name]: event.target.value });
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   // instance
-  //   //   .post("/parent/register", formInfo)
-  //   //   .then((response) => {
-  //   //     if (response.status === 201) {
-  //   //       setValidationMessage(
-  //   //         "Compte créé. Vous pouvez désormais vous connecter."
-  //   //       );
-  //   //     }
-  //   //   })
-  //   //   .catch((err) => {
-  //   //     if (err.response.status === 400)
-  //   //       setValidationMessage("Veuillez utiliser une autre adresse mail");
-  //   //   });
-  // };
+  const handleSubmit = () => {
+    instance
+      .post("/create", newBikeData)
+      .then((response) => {
+        if (response.status === 203) {
+          notifySuccess("Cette moto à été ajouter au stock");
+        } else {
+          notifyFail();
+        }
+      })
+      .catch((err) => {
+        if (err.response?.status === 403) {
+          logout(true);
+        }
+        if (err.response.status === 500) console.error(err);
+      });
+  };
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -67,12 +74,14 @@ export default function CreateBike() {
 
   const handleButtonClick = () => {
     if (!loading) {
-      console.info(newBikeData);
       setSuccess(false);
       setLoading(true);
       timer.current = window.setTimeout(() => {
         setSuccess(true);
         setLoading(false);
+        handleSubmit();
+        close();
+        setRefreshData(!refreshData);
       }, 2000);
     }
   };
@@ -82,7 +91,7 @@ export default function CreateBike() {
 
   return (
     <div className={styles.createbike_container}>
-      <p>Vous allez créer une moto</p>
+      <p>Vous allez ajouter une moto</p>
       <div className={styles.input_container}>
         <FormControl sx={{ width: 220, my: 2 }}>
           <InputLabel id="demo-simple-select-label">Marque</InputLabel>
@@ -91,8 +100,8 @@ export default function CreateBike() {
             id="demo-simple-select"
             label="Marque"
             required
-            name="segment_id"
-            value={newBikeData.segment_id}
+            name="brand_id"
+            value={newBikeData.brand_id}
             onChange={handleChange}
           >
             <MenuItem value="">
@@ -116,8 +125,8 @@ export default function CreateBike() {
             id="demo-simple-select"
             label="Catégorie"
             required
-            name="brand_id"
-            value={newBikeData.brand_id}
+            name="segment_id"
+            value={newBikeData.segment_id}
             onChange={handleChange}
           >
             <MenuItem value="">
@@ -166,8 +175,18 @@ export default function CreateBike() {
           label="Photo"
           required
           variant="outlined"
-          name="photo"
-          value={newBikeData.photo}
+          name="image_url"
+          value={newBikeData.image_url}
+          onChange={handleChange}
+        />
+        <TextField
+          sx={{ my: 2 }}
+          id="outlined-basic"
+          label="Couleur"
+          required
+          variant="outlined"
+          name="color"
+          value={newBikeData.color}
           onChange={handleChange}
         />
         <TextField
@@ -205,7 +224,7 @@ export default function CreateBike() {
             my: 6,
           }}
         >
-          <Button sx={{ mx: 2 }} variant="outlined">
+          <Button onClick={close} sx={{ mx: 2 }} variant="outlined">
             Annuler
           </Button>
           <Box sx={{ mx: 2, position: "relative" }}>
@@ -237,3 +256,9 @@ export default function CreateBike() {
     </div>
   );
 }
+
+CreateBike.propTypes = {
+  close: PropTypes.func.isRequired,
+  refreshData: PropTypes.bool.isRequired,
+  setRefreshData: PropTypes.func.isRequired,
+};

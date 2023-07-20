@@ -6,8 +6,8 @@ const itemControllers = require("./controllers/itemControllers");
 const userControllers = require("./controllers/userControllers");
 const bikeControllers = require("./controllers/bikeControllers");
 const {
-  // getUserByEmail,
-  // verifyPassword,
+  getUserByEmail,
+  verifyPassword,
   // hashPassword,
   // verifyIfUserIsRegistered,
   verifyToken,
@@ -22,7 +22,7 @@ router.delete("/items/:id", itemControllers.destroy);
 
 // ------------------  LOGIN & REGISTER routes  -----------------------
 
-// router.post("/login", getUserByEmail, verifyPassword);
+router.post("/login", getUserByEmail, verifyPassword);
 
 router.get("/logout", logout);
 
@@ -43,7 +43,21 @@ router.post("/users", verifyToken, userControllers.getUserList);
 
 // ------------------  BIKES routes  -----------------------
 
+router.get("/preview", bikeControllers.getBikeForPreview);
+
+router.get("/bikeslist", bikeControllers.getAllBikesInStock);
+
 router.get("/bikes", verifyToken, bikeControllers.getAllBikesInStock);
+
+router.get("/bike/:id", verifyToken, bikeControllers.getInfoOfThisBike);
+
+router.put("/delete/:id", verifyToken, bikeControllers.deleteThisBike);
+
+router.post("/create", verifyToken, bikeControllers.createBike);
+
+router.put("/modify/:id", verifyToken, bikeControllers.modifyThisBike);
+
+router.put("/sold/:id", verifyToken, bikeControllers.soldThisBike);
 
 // ------------------ / BIKES routes  -----------------------
 

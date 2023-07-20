@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import NavBar from "../../components/HomeComponents/NavBar/NavBar";
 import WallPaper from "../../components/HomeComponents/WallPaper/WallPaper";
 import PreviewListBikes from "../../components/HomeComponents/PreviewListBikes/PreviewListBikes";
@@ -14,14 +15,18 @@ export default function Home() {
       <WallPaper />
       <h3 className={styles.home_h3}>Nos motos du moment</h3>
       <PreviewListBikes />
-      <button type="button" className={styles.btn_to_page}>
-        Voir plus
-      </button>
+      <Link className={styles.link_class} to="/motos">
+        <button type="button" className={styles.btn_to_page}>
+          Voir plus
+        </button>
+      </Link>
       <h3 className={styles.home_h3}>Nos marques</h3>
       <PreviewBrandList />
-      <button type="button" className={styles.btn_to_page}>
-        Voir toutes nos marques
-      </button>
+      <Link className={styles.link_class} to="/">
+        <button type="button" className={styles.btn_to_page}>
+          Voir toutes nos marques
+        </button>
+      </Link>
       <h3 className={styles.home_h3}>À propos de nous</h3>
       <div className={styles.about_us_div}>
         <p>
@@ -40,14 +45,18 @@ export default function Home() {
           eaque! Ipsum, iste ad.
         </p>
       </div>
-      <button type="button" className={styles.btn_to_page}>
-        Lire la suite
-      </button>
+      <Link className={styles.link_class} to="/">
+        <button type="button" className={styles.btn_to_page}>
+          Lire la suite
+        </button>
+      </Link>
       <h3 className={styles.home_h3}>Le blog moto</h3>
       <PreviewBlog />
-      <button type="button" className={styles.btn_to_page}>
-        Voir plus
-      </button>
+      <Link className={styles.link_class} to="/">
+        <button type="button" className={styles.btn_to_page}>
+          Voir plus
+        </button>
+      </Link>
       <Footer />
     </div>
   );

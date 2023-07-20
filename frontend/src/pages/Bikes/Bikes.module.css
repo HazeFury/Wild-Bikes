@@ -1,0 +1,28 @@
+
+.result_number {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.previewlistbikes_container {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.pagination {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+    width: 100%;
+}
+
+@media screen and (max-width: 730px) {
+    .previewlistbikes_container {
+        flex-direction: column;
+    }
+}

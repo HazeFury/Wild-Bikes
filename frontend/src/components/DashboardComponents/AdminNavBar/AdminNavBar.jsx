@@ -8,10 +8,12 @@ import TwoWheelerIcon from "@mui/icons-material/TwoWheeler";
 import BoyIcon from "@mui/icons-material/Boy";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
+import { useUserContext } from "../../../contexts/userContext";
 import styles from "./AdminNavBar.module.css";
 import "../../../App.css";
 
 export default function AdminNavBar() {
+  const { logout } = useUserContext();
   const [openMenu, setOpenMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
@@ -29,8 +31,9 @@ export default function AdminNavBar() {
     setAnchorEl(null);
   };
   const handleLogout = () => {
-    navigate("/login");
+    logout(false);
     setAnchorEl(null);
+    navigate("/login");
   };
   useEffect(() => {
     const handleResize = () => {

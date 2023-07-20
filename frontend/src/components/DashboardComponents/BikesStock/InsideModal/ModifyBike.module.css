@@ -1,0 +1,23 @@
+.createbike_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.input_container {
+    height: 500px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    overflow: auto;
+}
+
+.input_container::-webkit-scrollbar {
+    display: none;
+}
+
+.btn_sold {
+    margin: 20px 0;
+}

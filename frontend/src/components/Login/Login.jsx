@@ -4,7 +4,9 @@ import { ThemeProvider } from "@emotion/react";
 import { TextField, Button, Alert, createTheme } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./Login.module.css";
+import { useUserContext } from "../../contexts/userContext";
 import "../../App.css";
+import instance from "../../services/APIService";
 
 const theme = createTheme({
   palette: {
@@ -16,8 +18,13 @@ const theme = createTheme({
 
 export default function Login() {
   const [loginInfo, setLoginInfo] = useState({});
-  const [infoMessage] = useState(null);
+  const [infoMessage, setInfoMessage] = useState();
+  const { login, sessionWarning, setSessionWarning } = useUserContext();
   const navigate = useNavigate();
+
+  const validateLogin =
+    Object.values(loginInfo).length === 2 &&
+    !Object.values(loginInfo).includes("");
 
   const handleChange = (e) => {
     setLoginInfo({
@@ -26,34 +33,28 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    navigate("/dashboard");
-    // if (validateLogin) {
-    //   // TODO gérer l'authentification de manière plus approfondie lorsqu'on aura eu tous les cours sur le sujet
-    //   instance
-    //     .post(`/${userType}/login`, loginInfo)
-    //     .then((response) => {
-    //       login(response.data);
-    //       if (response.data.role === "parent") {
-    //         if (pendingReservation) {
-    //           setPendingReservation(null);
-    //           navigate(`/particulier/recherche/${pendingReservation}/date`);
-    //         } else {
-    //           navigate(`/particulier/${response.data.id}`);
-    //         }
-    //       } else {
-    //         navigate("/pro");
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       if (error.response?.status === 401)
-    //         setInfoMessage("Les informations renseignées sont incorrectes.");
-    //       else setInfoMessage("Merci d'essayer plus tard.");
-    //     });
-    // } else {
-    //   setInfoMessage("Merci de compléter tous les champs.");
-    // }
+  const handleSubmit = () => {
+    if (validateLogin) {
+      // TODO gérer l'authentification de manière plus approfondie lorsqu'on aura eu tous les cours sur le sujet
+      instance
+        .post(`/login`, loginInfo)
+        .then((response) => {
+          login(response.data);
+          if (response.data.role === "admin") {
+            navigate("/dashboard");
+          } else {
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          if (error.response?.status === 401)
+            setInfoMessage("Les informations renseignées sont incorrectes.");
+          else setInfoMessage("Merci d'essayer plus tard.");
+        });
+    } else {
+      setInfoMessage("Merci de compléter tous les champs.");
+    }
+    setSessionWarning(null);
   };
   return (
     <ThemeProvider theme={theme}>
@@ -74,27 +75,29 @@ export default function Login() {
         </div>
         <div className={styles.login_box}>
           <div>
+            {sessionWarning ? (
+              <Alert severity="warning">{sessionWarning}</Alert>
+            ) : null}
             {infoMessage ? <Alert severity="error">{infoMessage}</Alert> : null}
           </div>
           <TextField
             required
-            color="primary"
             name="email"
             id="email"
             label="Entrez votre adresse mail"
             onChange={handleChange}
-            sx={{ my: 4, backgroundColor: "white", width: 300 }}
+            sx={{ my: 4, width: 300 }}
           />
           <TextField
             required
-            color="primary"
             name="password"
             id="password"
             label="Entrez votre mot de passe"
             onChange={handleChange}
-            sx={{ my: 4, backgroundColor: "white", width: 300 }}
+            sx={{ my: 4, width: 300 }}
             type="password"
           />
+
           <Button
             type="submit"
             variant="contained"

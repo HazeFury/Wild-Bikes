@@ -45,6 +45,10 @@
     letter-spacing: 1px;
 }
 
+.link_class {
+    text-align: center;
+}
+
 @media screen and (max-width: 730px) {
     .about_us_div {
         margin: 10px 30px;
