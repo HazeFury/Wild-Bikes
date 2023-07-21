@@ -30,19 +30,20 @@ export default function Home() {
       <h3 className={styles.home_h3}>À propos de nous</h3>
       <div className={styles.about_us_div}>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem
-          reprehenderit modi maiores, voluptate ducimus eum deleniti quos
-          perspiciatis! Ullam atque placeat, doloremque quo animi magni iste
-          asperiores aliquid non mollitia cum similique magnam, beatae aliquam
-          est a quidem odit tenetur nulla voluptas dolor, provident rerum
-          expedita.
+          Bienvenue chez Wild Bikes, la passion à deux roues depuis 2014 !
+          Fondée par Jean Pierre Herlant, un passionné de moto depuis son plus
+          jeune âge, notre concession est bien plus qu'un simple lieu de vente
+          de motos. Nous sommes fiers de vous proposer une vaste gamme de
+          modèles et de marques, le tout à des prix imbattables.
         </p>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
-          excepturi in aperiam voluptates quo! Quisquam quam mollitia quae
-          doloribus repellendus adipisci itaque corrupti eius odit veniam
-          veritatis ipsum nam nulla atque, modi animi ex nesciunt reprehenderit
-          eaque! Ipsum, iste ad.
+          Chez Wild Bikes, l'accompagnement de nos clients est au cœur de nos
+          préoccupations. Nous mettons un point d'honneur à vous offrir un
+          service personnalisé, afin de vous aider à trouver la moto de vos
+          rêves. Rejoignez-nous pour vivre l'expérience unique de la route, avec
+          une équipe dévouée qui partage votre passion pour l'aventure à
+          deux-roues. Que vous soyez novice ou chevronné, chez Wild Bikes,
+          chaque passionné de moto trouve son bonheur !
         </p>
       </div>
       <Link className={styles.link_class} to="/">
